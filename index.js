@@ -56,7 +56,7 @@ var server = http.createServer({
 // const io = require('socket.io')(server);
 // require(__dirname + '/src/controllers/socket_config.js')(io);
 
-server.listen(4400);
+server.listen(3000);
 
 app.use(function(req, res, next) {
     //req.io = io;
