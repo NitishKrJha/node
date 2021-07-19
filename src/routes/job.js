@@ -1,0 +1,52 @@
+var checkAuth = require("../middleware/check-auth");
+var job = require("../controllers/job");
+var small_task = require("../controllers/small_task");
+var dynamicForm = require("../controllers/dynamic_form");
+const {Router} = require('express');
+
+let route = Router();
+route
+    .post("/get_job_list/", checkAuth.checkOrganizationUser,job.get_list)
+    .post("/add_edit_job/", checkAuth.checkOrganizationUser,job.add_edit)
+    .post("/quick_update_job",checkAuth.checkOrganizationUser,job.delete_active_job)
+    .post("/omw",checkAuth.checkOrganizationUser,job.omw)
+    .post("/started",checkAuth.checkOrganizationUser,job.started)
+    .post("/pauseOnly",checkAuth.checkOrganizationUser,job.pauseOnly)
+    .post("/stopOnly",checkAuth.checkOrganizationUser,job.stopOnly)
+    .post("/stopOnlyApp",checkAuth.checkOrganizationUser,job.stopOnlyForInvoice)
+    .post("/paused",checkAuth.checkOrganizationUser,job.paused)
+    .post("/stopped",checkAuth.checkOrganizationUser,job.stopped)
+    .post("/stoppedApp",checkAuth.checkOrganizationUser,job.stoppedForApp)
+    .post("/uploadImgFileForJob",checkAuth.checkOrganizationUser,job.uploadImgFileForJob)
+    .post("/tasklist_member",checkAuth.checkOrganizationUser,job.task_list_of_member)
+    .post("/member_task_count",checkAuth.checkOrganizationUser,job.count_task_list_of_member)
+    .post("/dynamic_form_list/", checkAuth.checkOrganizationUser,dynamicForm.get_list)
+    .post("/dynamic_form_add_edit/", checkAuth.checkOrganizationUser,dynamicForm.add_edit)
+    .post("/quick_update_dynamic_form/",checkAuth.checkOrganizationUser,dynamicForm.delete_active_form)
+    .post("/get_distance_me",checkAuth.checkOrganizationUser,job.getDistanceMe)
+    .post("/get_task_details",checkAuth.checkOrganizationUser,job.getTaskDetails)
+    .post("/job_type_list/",checkAuth.checkOrganizationUser,job.get_job_type_list)
+    .post("/job_type_add_edit",checkAuth.checkOrganizationUser,job.job_type_add_edit)
+    .post("/job_type_delete",checkAuth.checkOrganizationUser,job.delete_job_type_active_form)
+    .post("/client_invoice_list",checkAuth.checkOrganizationUser,job.client_invoice_list)
+    .post("/job_payment",checkAuth.checkOrganizationUser,job.do_payment)
+    .post("/push_notification",checkAuth.checkOrganizationUser,job.push_notification)
+    .post("/job_report", checkAuth.checkOrganizationUser,job.getReportDetails)
+    .post('/job/mailtest', checkAuth.checkOrganizationUser,job.mailtest)
+    .get('/job/job_by_id/:id', job.getDetails)
+    .post("/drop_location",checkAuth.checkOrganizationUser,job.dropedLocation)
+    .post("/small_task_add_edit",checkAuth.checkOrganizationUser,small_task.add_edit_task)
+    .post("/get_all_small_task",checkAuth.checkOrganizationUser,small_task.get_all_small_task)
+    .post("/add_edit_task_status",checkAuth.checkOrganizationUser,small_task.add_edit_task_status)
+    .post("/get_all_task_status",checkAuth.checkOrganizationUser,small_task.get_all_task_status)
+    .post("/quick_update_small_task",checkAuth.checkOrganizationUser,small_task.quick_update_small_task)
+    .post("/delete_status_small_task",checkAuth.checkOrganizationUser,small_task.delete_status_small_task)
+    .post("/insert_default_status",checkAuth.checkOrganizationUser,small_task.insert_default_status)
+    .post("/delete_status_small_task_files",checkAuth.checkOrganizationUser,small_task.delete_status_small_task_files)
+    .post("/small_task_comment",checkAuth.checkOrganizationUser,small_task.small_task_comment)
+    .post("/get_all_task_comment",checkAuth.checkOrganizationUser,small_task.get_all_task_comment)
+    .post("/upload_file",checkAuth.checkOrganizationUser,small_task.uploadFile)
+    .post("/add_edit_small_task_category",checkAuth.checkOrganizationUser,small_task.add_edit_small_task_category)
+    .post("/get_all_task_category",checkAuth.checkOrganizationUser,small_task.get_all_task_category)
+    .post("/delete_category_task",checkAuth.checkOrganizationUser,small_task.delete_category_task)
+module.exports.jobRoutes = route;
