@@ -53,13 +53,13 @@ var server = http.createServer({
     //ca: fs.readFileSync('/etc/letsencrypt/live/www.dev.crmrunner.com/chain.pem')
 }, app);
 
-// const io = require('socket.io')(server);
-// require(__dirname + '/src/controllers/socket_config.js')(io);
+const io = require('socket.io')(server);
+require(__dirname + '/src/controllers/socket_config.js')(io);
 
-server.listen(3000);
+server.listen(3000,'127.0.0.1');
 
 app.use(function(req, res, next) {
-    //req.io = io;
+    req.io = io;
     next();
 });
 
